@@ -1,6 +1,8 @@
 // Package rest is port handler.
 package rest
 
+import "github.com/abialemuel/ymirblog/pkg/entity"
+
 // GetArticleRequest Get a Article request.  /** PLEASE EDIT THIS EXAMPLE, request handler */.
 type GetArticleRequest struct {
 	Title  *string
@@ -30,4 +32,31 @@ type SimpleUserResponse struct {
 type SimpleTagResponse struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
+}
+
+type GetOrDeleteArticleByIDRequest struct {
+	ID int `json:"id" validate:"required"`
+}
+
+type UpdateArticleRequest struct {
+	// from path parameter
+	ID string `json:"id" validate:"required"`
+	// from body
+	UserID int      `json:"user_id" validate:"required"`
+	Title  string   `json:"title" validate:"required"`
+	Body   string   `json:"body" validate:"required"`
+	Tags   []string `json:"tags,omitempty" validate:"required"`
+}
+
+type CreateArticleRequest struct {
+	UserID int      `json:"user_id" validate:"required"`
+	Title  string   `json:"title" validate:"required"`
+	Body   string   `json:"body" validate:"required"`
+	Tags   []string `json:"tags,omitempty" validate:"required"`
+}
+
+type ResponseArticle struct {
+	Message  string           `json:"message"`
+	Article  *entity.Article  `json:"article,omitempty"`
+	Articles []entity.Article `json:"articles,omitempty"`
 }
