@@ -27,3 +27,10 @@ type GetArticlePayload struct {
 	Limit  int
 	Page   int
 }
+
+type UpsertArticlePayload struct {
+	UserID int
+	Title  string
+	Body   string
+	Tags   []Tag
+}
